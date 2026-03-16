@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>個人履歷 - 亞洲大學 AU114022011</title>
+    <style>
+        /* CSS 樣式設定 */
+        :root {
+            --primary-color: #2c3e50;
+            --accent-color: #3498db;
+            --bg-color: #f4f7f6;
+            --text-color: #333;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .resume-container {
+            background: #fff;
+            width: 90%;
+            max-width: 800px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            margin: 20px;
+        }
+
+        header {
+            text-align: center;
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            margin: 0;
+            color: var(--primary-color);
+            font-size: 2.5rem;
+        }
+
+        .student-id {
+            color: var(--accent-color);
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        section {
+            margin-bottom: 25px;
+        }
+
+        h2 {
+            border-left: 5px solid var(--accent-color);
+            padding-left: 15px;
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .tag {
+            background: var(--accent-color);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+
+        .tag:hover {
+            transform: translateY(-3px);
+            background: #2980b9;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 0.8rem;
+            color: #888;
+        }
+
+        /* 互動效果 */
+        .hidden { opacity: 0; transform: translateY(20px); }
+        .fade-in {
+            transition: all 0.8s ease-out;
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="resume-container">
+        <header>
+            <h1 id="name">kib</h1>
+            <p class="student-id">亞洲大學 | 學號：AU114022011</p>
+            <p>電子郵件：AU114022011@asia.edu.tw</p>
+        </header>
+
+        <section class="reveal">
+            <h2>關於我 / About Me</h2>
+            <p>
+                目前就讀於亞洲大學。我是一位對技術充滿熱情、勇於挑戰自我的學習者。
+                在校期間專注於學術成長，並積極參與各項專業技能培訓，目標是將所學知識應用於實際問題解決。
+            </p>
+        </section>
+
+        <section class="reveal">
+            <h2>學歷資訊 / Education</h2>
+            <div class="info-grid">
+                <div>
+                    <strong>亞洲大學 (Asia University)</strong><br>
+                    大學部 - 在學中
+                </div>
+                <div style="text-align: right;">
+                    2025 - 至今
+                </div>
+            </div>
+        </section>
+
+        <section class="reveal">
+            <h2>專業技能 / Skills</h2>
+            <div class="skill-tags" id="skill-container">
+                <!-- 技能將由 JS 動態產生 -->
+            </div>
+        </section>
+
+        <section class="reveal">
+            <h2>自我期許 / Goals</h2>
+            <ul>
+                <li>精進專業領域知識與實作能力</li>
+                <li>取得相關產業證照</li>
+                <li>參與校內外專案開發，累積實務經驗</li>
+            </ul>
+        </section>
+
+        <footer>
+            <p>© 2025 Designed for Asia University Student AU114022011</p>
+            <button id="colorBtn" style="cursor:pointer; border:none; background:none; color:var(--accent-color); text-decoration:underline;">更換主題色</button>
+        </footer>
+    </div>
+
+    <script>
+        // JavaScript 邏輯
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // 1. 動態生成技能標籤
+            const skills = ['HTML5', 'CSS3', 'JavaScript', '團隊合作', '解決問題', '積極學習'];
+            const skillContainer = document.getElementById('skill-container');
+            
+            skills.forEach(skill => {
+                const span = document.createElement('span');
+                span.className = 'tag';
+                span.innerText = skill;
+                skillContainer.appendChild(span);
+            });
+
+            // 2. 滾動顯示動畫 (Scroll Reveal)
+            const reveals = document.querySelectorAll('.reveal');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('fade-in');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            reveals.forEach(el => {
+                el.classList.add('hidden');
+                observer.observe(el);
+            });
+
+            // 3. 互動功能：更換主題色
+            const colorBtn = document.getElementById('colorBtn');
+            const colors = ['#3498db', '#e74c3c', '#27ae60', '#8e44ad', '#f39c12'];
+            let colorIndex = 0;
+
+            colorBtn.addEventListener('click', () => {
+                colorIndex = (colorIndex + 1) % colors.length;
+                document.documentElement.style.setProperty('--accent-color', colors[colorIndex]);
+            });
+
+            // 可以在這裡自行修改姓名
+            // document.getElementById('name').innerText = "王小明";
+        });
+    </script>
+</body>
+</html>
